@@ -1,18 +1,19 @@
-const Raspi = require("raspi-io").RaspiIO;
-const board = new five.Board({
-    io: new Raspi()
+const {RaspiIO} = require("raspi-io");
+const {Led, Board} = require("johnny-five");
+const board = new Board({
+    io: new RaspiIO()
 });
 
 const API = {}
 
 board.on("ready", function() {
+    var led = new Led("P1-7"); // P1-13
+    
     API.blink = (state) => {
-        var led = new five.Led("P1-13");
         if (state == "start") {
             led.blink();
             return
         } 
-
         return led.stop()
     };
 

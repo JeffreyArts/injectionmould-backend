@@ -26,10 +26,13 @@ if (process.env.NODE_ENV === 'raspberry') {
 
 
 const httpServer = createServer();
+const corsOrigin = process.env.CORS.split(",").map(url => {
+    return `http://${url.trim()}`
+})
 
 const io = new Server(httpServer, {
   cors: {
-    origin: [ "http://127.0.0.1:5173"],
+    origin: [ "http://127.0.0.1:5173", "http://localhost"],
     methods: ["GET", "POST"]
   }
 });
