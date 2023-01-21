@@ -6,15 +6,21 @@ const { Server } = require("socket.io");
 const { instrument } = require("@socket.io/admin-ui");
 const five = require("johnny-five");
 let tmpInterval = null
-
+let status = "aan"
 let API = {
     blink: (state) => {
         if (state == "start") {
             tmpInterval = setInterval(() => {
-                console.log('Blinking')
+                if (status == "aan") {
+                    status = "uit"
+                } else {
+                    status = "aan"
+                }
+                console.log(status)
             }, 1000)
         } else {
             clearInterval(tmpInterval)
+            console.log("klaar")
         }
     }
 }
